@@ -1,13 +1,14 @@
 require "json"
 
+DB_FILE_NAME="./application_db.json"
 
 def get_db()
     begin
-        db_file = File.read("./application_db.json")
+        db_file = File.read(DB_FILE_NAME)
         db = JSON.parse(db_file)
         return db
     rescue => exception
-        puts("Unable to Open Database file")
+        puts(DB_FILE_NAME)
         puts(exception)
         exit()
     end
@@ -15,7 +16,7 @@ end
 
 def write_to_db_file(db)
     begin
-        File.write("./application_db.json",JSON.dump(db))
+        File.write(DB_FILE_NAME,JSON.dump(db))
     rescue => exception 
         puts("Exception Oocured while saving to database file")
         puts(exception)

@@ -6,6 +6,7 @@ class Property
     attr_accessor :bhk
     attr_accessor :cost
     attr_accessor :owner
+    attr_accessor :created_at
     def initialize(type,city,bhk,cost,owner)
         @id = rand(0..1000)
         @type = type
@@ -13,8 +14,9 @@ class Property
         @bhk = bhk
         @cost = cost
         @owner = owner
+        @created_at = Time.now
         db =get_db()
-        db["property_managers"][@owner]["properties"][@id] = {"Id":@id,"type":@type,"city":@city,"bhk":@bhk,"cost":@cost,"owner":@owner}
+        db["property_managers"][@owner]["properties"][@id] = {"Id":@id,"type":@type,"city":@city,"bhk":@bhk,"cost":@cost,"owner":@owner,"created_at":@created_at.to_i}
         write_to_db_file(db)
     end
 
